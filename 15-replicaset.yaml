@@ -18,7 +18,7 @@ spec:
         tier: frontend         
     spec:
       containers:
-        name: nginx
+      - name: nginx
         image: nginx
 
 ---
