@@ -1,0 +1,25 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: pod-config
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    envFrom:
+    - configMapRef:
+        name: nginx-config
+
+    # Instead of using it for each key we can directly give the file name and all the key values are choosen from there
+    # env: 
+    # - name: course
+    #   valueFrom: 
+    #     configMapKeyRef:
+    #       name: nginx-config # name of the config map we are referring to
+    #       key: course # env.name and config map key name can be different    
+    # - name: duration
+    #   valueFrom:
+    #     configMapKeyRef:
+    #       name: nginx-config
+    #       key: duration
+    
