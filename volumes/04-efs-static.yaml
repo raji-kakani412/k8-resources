@@ -12,17 +12,17 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   csi:
     driver: efs.csi.aws.com
-    volumeHandle: [fs-0b6fc6c3c4edd7ed9] # enter the volume id
+    volumeHandle: fs-0b6fc6c3c4edd7ed9
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: expense-efs
 spec:
+  volumeName: expense-efs
   accessModes:
     - ReadWriteOnce
   storageClassName: ""
-  volumeName: expense-efs
   resources:
     requests:
       storage: 5Gi
@@ -37,7 +37,7 @@ spec:
   containers:
   - name: nginx
     image: nginx
-    volumeMounts: # docker run -v hostpath:containerpath
+    volumeMounts: # docker run -v hostpath:contaierpath
     - name: expense-efs
       mountPath: /usr/share/nginx/html
   volumes:
@@ -45,10 +45,10 @@ spec:
     persistentVolumeClaim:
       claimName: expense-efs
 ---
+kind: Service
 apiVersion: v1
-kind: Service 
 metadata:
-  name: nginx-lb
+  name: nginx
 spec:
   type: LoadBalancer
   selector:
@@ -56,6 +56,6 @@ spec:
   ports:
   - name: nginx-svc-port
     protocol: TCP
-    port: 80 # this is service port
-    targetPort: 80 # this is container port.
+    port: 80 # service port
+    targetPort: 80 # container port
     nodePort: 30007
