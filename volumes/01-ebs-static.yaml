@@ -31,7 +31,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage:  5Gi # should to equal to less than PV storage but we cannot request not more than that
+      storage:  5Gi # should be equal to or less than PV storage but we cannot request not more than that
 ---
 apiVersion: v1
 kind: Pod
@@ -46,10 +46,10 @@ spec:
   - name: nginx
     image: nginx
     volumeMounts: # docker run -v hostpath:containerpath
-    - name: ebs-static-pv
+    - name: ebs-static
       mountPath: /usr/share/nginx/html
   volumes:
-  - name: ebs-static-pv
+  - name: ebs-static
     persistentVolumeClaim:
       claimName: ebs-static-claim
 ---
