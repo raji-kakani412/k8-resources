@@ -55,7 +55,7 @@ spec:
     purpose: efs-static
   ports:
   - name: nginx-svc-port
-    protocol: tcp
+    protocol: TCP
     port: 80 # this is service port
     targetPort: 80 # this is container port.
     nodePort: 30007
