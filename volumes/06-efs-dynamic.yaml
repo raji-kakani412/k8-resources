@@ -22,7 +22,7 @@ spec:
    # topology.kubernetes.io/zone: us-east-1d
   containers:
   - name: nginx
-    image: nginx:stable-alpine3.20-perl
+    image: nginx
     volumeMounts: # docker run -v hostpath:containerpath
     - name: efs-dynamic
       mountPath: /usr/share/nginx/html
